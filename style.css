@@ -1,3 +1,33 @@
+body {
+    background-color: black;
+}
+
+.jumbotron {
+    background-image: url(images/railway.jpg);
+    background-size: cover;
+    background-color: burlywood;
+}
+
+#current-time {
+    margin-top: -30px;
+}
+#head-title {
+    margin-bottom: 100px;
+}
+
+#train-schedule,
+#train-adder {
+    background-color: burlywood;
+}
+
+
+
 #current-time {
     font-family: "Courier New", Courier, monospace;
+}
+
+#submit-btn {
+    background-color: burlywood;
+    color: black;
+    border-color: black;
 }

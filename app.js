@@ -23,22 +23,24 @@
   displayRealTime();
 
 // button for adding train
-$(".btn btn-primary").on("click", function(event) {
+$("#submit-btn").on("click", function(event) {
     event.preventDefault();
-
+    collectData();
+});
     // grab the user input
-    var trainName = $("#trainName").val().trim();
-    var sendLocation = $("#userDestination").val().trim();
-    var firstSend = $("#1stTrain").val().trim();
-    var trainInterval = $("#frequent").val().trim();
+    // var trainName = $("#trainName").val().trim();
+    // var sendLocation = $("#userDestination").val().trim();
+    // var firstSend = $("#1stTrain").val().trim();
+    // var trainInterval = $("#frequent").val().trim();
 
 
     // temporary data holder
+    function collectData() {
     var newTrain = {
-        name: trainName,
-        destination: sendLocation,
-        start: firstSend,
-        freq: trainInterval
+        name: $("#trainName").val().trim(),
+        destination: $("#userDestination").val().trim(),
+        start: $("#1stTrain").val().trim(),
+        freq: $("#frequent").val().trim()
     };
 
 // upload the train data to database:
@@ -56,23 +58,24 @@ $(".btn btn-primary").on("click", function(event) {
     $("#userDestination").val("");
     $("#1stTrain").val("");
     $("#frequent").val("");
-});
+};
 
 database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
 
-    var trainName = childSnapshot.val().name;
-    var sendLocation = childSnapshot.val().destination;
-    var firstSend = childSnapshot.val().start;
-    var trainInterval = childSnapshot.val().freq;
+    var newTrain = childSnapshot.val();
+    // var trainName = childSnapshot.val().name;
+    // var sendLocation = childSnapshot.val().destination;
+    // var firstSend = childSnapshot.val().start;
+    // var trainInterval = childSnapshot.val().freq;
 
-    console.log(trainName);
-    console.log(sendLocation);
-    console.log(firstSend);
-    console.log(trainInterval);
+    // console.log(trainName);
+    // console.log(sendLocation);
+    // console.log(firstSend);
+    // console.log(trainInterval);
 
     // First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(firstSend, "HH:mm").subtract(1, "years");
+    var firstTimeConverted = moment(newTrain.start, "HH:mm").subtract(1, "years");
     console.log(firstTimeConverted);
 
     // Current Time
@@ -84,11 +87,11 @@ database.ref().on("child_added", function(childSnapshot) {
     console.log("DIFFERENCE IN TIME: " + diffTime);
 
     // Time apart (remainder)
-    var tRemainder = diffTime % trainInterval;
+    var tRemainder = diffTime % newTrain.freq;
     console.log(tRemainder);
 
     // Minute Until Train
-    var minutesAway = trainInterval - tRemainder;
+    var minutesAway = newTrain.freq - tRemainder;
     console.log("MINUTES TILL TRAIN: " + minutesAway);
 
     // Next Train
@@ -98,11 +101,11 @@ database.ref().on("child_added", function(childSnapshot) {
 
     // create the table based on entry
     var newRow = $("<tr>").append(
-        $("<td>").text(trainName),
-        $("<td>").text(sendLocation),
-        $("<td>").text(trainInterval),
-        $("<td>").text(nextArrive),
-        $("<td>").text(minAway)
+        $("<td>").text(newTrain.name),
+        $("<td>").text(newTrain.destination),
+        $("<td>").text(newTrain.freq),
+        $("<td>").text(upcomingTrain),
+        $("<td>").text(minutesAway)
     );
 
     // append the new row to the table 

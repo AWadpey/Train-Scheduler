@@ -5,18 +5,15 @@
     <meta charset="8">
     <title>Train Schedule</title>
 
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css"/>  
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-
-    <!-- Moment.js Reference -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="app.js"></script>
 
 </head>
 
@@ -24,16 +21,17 @@
     
     <div class="container">
         <div class="jumbotron">
-            <h1 class="text-center" id="head-title">Destination on Rails</h1>
             <h5 class="text-center" id="current-time"></h5>
+
+            <h1 class="text-center" id="head-title">Destination on Rails</h1>
         </div>
     
     <!-- available trains after user input -->
-    <div class="container">
+    <div class="container" >
             <div class="card mb-4">
-                    <div class="card-header">Our Train Schedule</div>
-                    <div class="card-body">
-                            <table class="table table-sm table-hover" id='train-table'>
+                    <div class="card-header" id="train-schedule">Our Train Schedule</div>
+                    <div class="card-body" >
+                            <table class="table table-sm table-hover" id="train-table">
                                     <thead>
                                       <tr>
                                         <th scope="col">Train Name</th>
@@ -71,10 +69,10 @@
     </div>
 
     <!-- user desired train input -->
-    <div class="container">
+    <div class="container" >
 
             <div class="card mb-4">
-                    <div class="card-header">Add Train</div>
+                    <div class="card-header" id="train-adder">Add Train</div>
                     <div class="card-body">
         <form>
             <div class="form-group">
@@ -93,14 +91,19 @@
                 <label for="frequency-input">Frequency (minutes)</label>
                 <input class="form-control" id="frequent" placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
         </form>
     </div>
     </div>
     </div>
+        <!-- Firebase Reference -->
+        <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+
+        <!-- Moment.js Reference -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="app.js"></script>
 
 
 </body>
